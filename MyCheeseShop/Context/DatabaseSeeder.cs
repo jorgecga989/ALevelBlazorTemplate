@@ -4,6 +4,7 @@ using MyCheeseShop.Model;
 
 namespace MyCheeseShop.Context
 {
+
     public class DatabaseSeeder
     {
         private readonly DatabaseContext _context;
@@ -16,7 +17,9 @@ namespace MyCheeseShop.Context
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async Task Seed()
+
+        
+        public async Task Seed()    
         {
             await _context.Database.MigrateAsync();
 
@@ -42,7 +45,41 @@ namespace MyCheeseShop.Context
                 await _userManager.CreateAsync(admin, adminPassword);
                 await _userManager.AddToRoleAsync(admin, "admin");
             }
+            if (!_context.Cheeses.Any())
+            {
+                var cheeses = GetCheeses();
+                _context.Cheeses.AddRange(cheeses);
+                await _context!.SaveChangesAsync();
+            }
         }
+        private List<Cheese> GetCheeses()
+        {
+            return
+            [
+                new Cheese { Name = "Cheddar", Type = "Hard", Description = "Sharp and tangy", Strength = "Medium", Price = 10 },
+                new Cheese { Name = "Brie", Type = "Soft", Description = "Creamy and mild", Strength = "Mild", Price = 12 },
+                new Cheese { Name = "Gouda", Type = "Semi-hard", Description = "Smooth and nutty", Strength = "Medium", Price = 8 },
+                new Cheese { Name = "Mozzarella", Type = "Soft", Description = "Mild and milky", Strength = "Mild", Price = 9 },
+                new Cheese { Name = "Swiss", Type = "Hard", Description = "Nutty and sweet", Strength = "Medium", Price = 11 },
+                new Cheese { Name = "Blue Cheese", Type = "Semi-soft", Description = "Sharp and tangy with blue mold", Strength = "Strong", Price = 14 },
+                new Cheese { Name = "Parmesan", Type = "Hard", Description = "Sharp and salty", Strength = "Strong", Price = 13 },
+                new Cheese { Name = "Feta", Type = "Soft", Description = "Tangy and crumbly", Strength = "Medium", Price = 10 },
+                new Cheese { Name = "Camembert", Type = "Soft", Description = "Creamy and earthy", Strength = "Medium", Price = 12 },
+                new Cheese { Name = "Provolone", Type = "Semi-hard", Description = "Smooth and mild", Strength = "Medium", Price = 9 },
+                new Cheese { Name = "Roquefort", Type = "Blue", Description = "Sharp and creamy with blue mold", Strength = "Strong", Price = 15 },
+                new Cheese { Name = "Havarti", Type = "Semi-soft", Description = "Creamy and buttery", Strength = "Medium", Price = 11 },
+                new Cheese { Name = "Munster", Type = "Semi-soft", Description = "Creamy and mild", Strength = "Medium", Price = 10 },
+                new Cheese { Name = "Pepper Jack", Type = "Semi-hard", Description = "Spicy and creamy", Strength = "Medium", Price = 10 },
+                new Cheese { Name = "Ricotta", Type = "Soft", Description = "Mild and creamy", Strength = "Mild", Price = 8 },
+                new Cheese { Name = "Fontina", Type = "Semi-soft", Description = "Nutty and earthy", Strength = "Medium", Price = 12 },
+                new Cheese { Name = "Colby", Type = "Semi-hard", Description = "Mild and creamy", Strength = "Mild", Price = 9 },
+                new Cheese { Name = "Edam", Type = "Hard", Description = "Mild and nutty", Strength = "Medium", Price = 10 },
+                new Cheese { Name = "Asiago", Type = "Hard", Description = "Sharp and nutty", Strength = "Medium", Price = 11 },
+                new Cheese { Name = "Gorgonzola", Type = "Blue", Description = "Sharp and creamy with blue mold", Strength = "Strong", Price = 14 }
+            ];
+        
+        }
+
     }
 
 }
