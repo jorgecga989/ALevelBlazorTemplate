@@ -4,6 +4,7 @@ using MyCheeseShop.Context;
 using MyCheeseShop.Model;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using MyCheeseShop.Components.Account.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 builder.Services.AddScoped<ShoppingCart>();
 builder.Services.AddScoped<CheeseProvider>();
+builder.Services.AddScoped<StoreItem>();
 
 builder.Services.AddAuthentication(options =>
 {

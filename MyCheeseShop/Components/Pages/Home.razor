@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using MyCheeseShop.Components.Account.Shared
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject CheeseProvider CheeseProvider
@@ -14,6 +15,16 @@ else if(!cheeses.Any())
     <p>No cheeses found :(</p>
 }
 
+@foreach (var cheese in cheeses)
+{
+    <div class="col">
+        <StoreItem Cheese="cheese" />
+    </div>
+}
+@if (!cheeses.Any())
+{
+    <p>No cheeses found :(</p>
+}
 
 
 

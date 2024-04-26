@@ -1,5 +1,43 @@
-﻿<h3>StoreItem</h3>
+﻿@using MyCheeseShop.Model
+
+<div class="container text-center">
+      <div class="row">
+           <div class="col">
+              <h5>
+                  <span class="badge bg-primary">@Cheese.Type</span>
+                  <span class="badge bg-success">@Cheese.Strength</span>
+               </h5>
+               <h4>
+                   @Cheese.Name
+                   <h5>
+                       <span class="badge bg-danger">£@Cheese.Price</span>
+                   </h5>
+               </h4>
+               <h6>@Cheese.Description</h6>
+              <EditForm Model="quantity" OnSubmit="AddToCart">
+                 <div></div>
+              </EditForm>
+           </div>
+            
+       </div>
+</div>
+ 
+<EditForm Model="quantity" OnSubmit="AddToCart">
+    <div></div>
+</EditForm>
+
+
+
 
 @code {
 
+    [Parameter]
+    public Cheese Cheese { get; set; }
+
+    private int quantity = 1;
+
+    public async Task AddToCart()
+    {
+        
+    }
 }
