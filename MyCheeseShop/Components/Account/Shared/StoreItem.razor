@@ -6,36 +6,37 @@
             <img src="https://cheese-etc.co.uk/wp-content/uploads/2020/02/westcombe-cheddar-cheese.jpeg" class="img-fluid rounded-start" />
         </div>
         <div class="col">
-            <h5>
-                <span class="badge bg-primary">@Cheese.Type</span>
-                <span class="badge bg-success">@Cheese.Strength</span>
-            </h5>
-            <h4 class="card-title">@Cheese.Name </h4>
-            <h5>
-                <span class="badge bg-danger">£@Cheese.Price</span>
-            </h5>
-            <p>@Cheese.Description</p>
-            <EditForm Model="quantity" OnSubmit="AddToCart">
-                <div>
-                    <select class="form-select" id="inputGroupSelect01">
-                        @for (var i = 1; i <= 5; i++)
-                        {
-                            <option value="@i">@(i * 100)g </option>
-                        }
-                    </select>
-                    <p></p>
-                    <a href="#" class="btn btn-primary">Add to cart</a>
-                    <p></p>
-                </div>
-            </EditForm>
+            <div class="row">
+                <h5>
+                    <span class="badge bg-primary">@Cheese.Type</span>
+                    <span class="badge bg-success">@Cheese.Strength</span>
+                </h5>
+                <h4 class="card-title">
+                    @Cheese.Name
+                    <span class="badge bg-danger">£@Cheese.Price</span>
+                </h4>
+                <p>@Cheese.Description</p>
+                <EditForm Model="quantity" OnSubmit="AddToCart">
+                    <div>
+                        <InputSelect class="form-select w-100" @bind-Value="quantity" required>
+                            @for (var i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@(i * 100)g </option>
+                            }
+                        </InputSelect>
+                        <p></p>
+                        <a href="#" class="btn btn-primary">
+                            Add to cart
+
+                        </a>
+                        <p></p>
+                    </div>
+                </EditForm>
+            </div>
         </div>
         
     </div>
 </div>
-
-<EditForm Model="quantity" OnSubmit="AddToCart">
-    <div></div>
-</EditForm>
 
 
 
