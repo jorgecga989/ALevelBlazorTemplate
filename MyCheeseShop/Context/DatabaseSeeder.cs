@@ -66,14 +66,14 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Feta", Type = "Soft", Description = "Tangy and crumbly", Strength = "Medium", Price = 10, ImageURL="feta.png" },
                 new Cheese { Name = "Camembert", Type = "Soft", Description = "Creamy and earthy", Strength = "Medium", Price = 12, ImageURL="camembert.png" },
                 new Cheese { Name = "Provolone", Type = "Semi-hard", Description = "Smooth and mild", Strength = "Medium", Price = 9, ImageURL="provolone.png" },
-                new Cheese { Name = "Roquefort", Type = "Blue", Description = "Sharp and creamy with blue mold", Strength = "Strong", Price = 15, ImageURL="roquefort.png" },
+                new Cheese { Name = "Goat", Type = "Blue", Description = "Sharp and creamy with blue mold", Strength = "Strong", Price = 15, ImageURL="goat.png" },
                 new Cheese { Name = "Havarti", Type = "Semi-soft", Description = "Creamy and buttery", Strength = "Medium", Price = 11,ImageURL="havarti.png" },
-                new Cheese { Name = "Munster", Type = "Semi-soft", Description = "Creamy and mild", Strength = "Medium", Price = 10, ImageURL="munster.png" },
+                new Cheese { Name = "Manchego", Type = "Semi-soft", Description = "Creamy and mild", Strength = "Medium", Price = 10, ImageURL="manchego.png" },
                 new Cheese { Name = "Pepper Jack", Type = "Semi-hard", Description = "Spicy and creamy", Strength = "Medium", Price = 10, ImageURL="pepperjack.png" },
                 new Cheese { Name = "Ricotta", Type = "Soft", Description = "Mild and creamy", Strength = "Mild", Price = 8, ImageURL="ricotta.png" },
-                new Cheese { Name = "Fontina", Type = "Semi-soft", Description = "Nutty and earthy", Strength = "Medium", Price = 12, ImageURL="fontina.png" },
+                new Cheese { Name = "Monterey", Type = "Semi-soft", Description = "Nutty and earthy", Strength = "Medium", Price = 12, ImageURL="monterey.png" },
                 new Cheese { Name = "Colby", Type = "Semi-hard", Description = "Mild and creamy", Strength = "Mild", Price = 9, ImageURL="colby.png" },
-                new Cheese { Name = "Edam", Type = "Hard", Description = "Mild and nutty", Strength = "Medium", Price = 10, ImageURL="edam.png" },
+                new Cheese { Name = "Pecorino", Type = "Hard", Description = "Mild and nutty", Strength = "Medium", Price = 10, ImageURL="pecorino.png" },
                 new Cheese { Name = "Emmental", Type = "Hard", Description = "Sharp and nutty", Strength = "Medium", Price = 11, ImageURL="emmental.png" },
                 new Cheese { Name = "Gorgonzola", Type = "Blue", Description = "Sharp and creamy with blue mold", Strength = "Strong", Price = 14, ImageURL="gorgonzola.png" }
             ];
