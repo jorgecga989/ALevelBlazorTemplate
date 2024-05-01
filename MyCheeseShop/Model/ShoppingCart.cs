@@ -26,6 +26,17 @@
             OnCartUpdated?.Invoke();
         }
 
+        public IEnumerable<CartItem> GetItems ()
+        {
+            //copy of items in cart
+            return _items;
+        }
+        public int GetQuantity(Cheese cheese) 
+        {
+            var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
+            return item?.Quantity ?? 0;
+        }
+
         public IEnumerable<CartItem> GetItem()
         {
             //return a copy of the items in the cart

@@ -1,4 +1,7 @@
-﻿@using MyCheeseShop.Model
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Model
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject ShoppingCart ShoppingCart
 
 <div class="card h-100" style="max-width: 300px;">
     <div class="container text-center">
@@ -21,12 +24,20 @@
                         <InputSelect class="form-select w-100" @bind-Value="quantity" required>
                             @for (var i = 1; i <= 5; i++)
                             {
-                                <option value="@i">@(i * 100)g </option>
+                                <option value="@i"> @(i * 100)g </option>
                             }
                         </InputSelect>
-                        <p></p>
-                        <button type="button" class="btn btn-outline-primary">
+
+                        <button class="btn btn-primary position-relative w-100">
                             Add to cart
+                            @if(ShoppingCart.GetQuantity(Cheese) > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    +@(ShoppingCart.GetQuantity(Cheese) * 100)g
+                                    <span class="visually-hidden">@Cheese.Name in shopping cart</span>
+                                </span>
+                            }
+
                         </button>
                         <p></p>
                     </div>
@@ -49,6 +60,8 @@
 
     public async Task AddToCart()
     {
-        
+        ShoppingCart.AddItem(Cheese, quantity);
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
+
     }
 }
