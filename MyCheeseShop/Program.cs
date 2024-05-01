@@ -20,6 +20,7 @@ builder.Services.AddScoped<ShoppingCart>();
 builder.Services.AddScoped<CheeseProvider>();
 builder.Services.AddScoped<StoreItem>();
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = IdentityConstants.ApplicationScheme;
