@@ -22,8 +22,13 @@
             {
                 item.Quantity += quantity;
             }
-            //alert the listeners to the cart page
+            //cart page
             OnCartUpdated?.Invoke();
+        }
+        public int Count()
+        {
+            return _items.Count;
+            //return num items in the cart
         }
 
         public IEnumerable<CartItem> GetItems ()

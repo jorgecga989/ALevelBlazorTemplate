@@ -5,6 +5,7 @@ using MyCheeseShop.Model;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using MyCheeseShop.Components.Account.Shared;
+using MyCheeseShop.Components.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 

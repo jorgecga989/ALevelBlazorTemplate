@@ -1,9 +1,10 @@
 ﻿@page "/"
-@using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject CheeseProvider CheeseProvider
 @inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
 
 <PageTitle>Home</PageTitle>
 
@@ -15,8 +16,27 @@ else if(!cheeses.Any())
 {
     <p>No cheeses found :(</p>
 }
+<div class="d-flex justify-content-between flex-column flex-md-row mb-1">
+    <div class="d-flex">
+        <div class="dropdown">
+            <a class="btn btn-outline-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort by @sortCriteria.ToString()
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" @onclick="() => Sort(SortCriteria.Name)">Name</a></li>
+                <li><a class="dropdown-item" href="#" @onclick="() => Sort(SortCriteria.Price)">Price</a></li>
+                <li><a class="dropdown-item" href="#" @onclick="() => Sort(SortCriteria.Type)">Type</a></li>
+                <li><a class="dropdown-item" href="#" @onclick="() => Sort(SortCriteria.Strength)">Strength</a></li>
+            </ul>
+        </div>
+        <input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
+    </div>
+    <div>
+        <a @onclick="GoToCart" class="btn btn-outline-primary">Cart (@ShoppingCart.Count())</a>
+    </div>
+</div>
 <div class="row row-cols-1 row-cols-md-4 g-4">
-    <input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
+    
     @foreach (var cheese in FilteredCheeses)
     {
         <div class="col">
@@ -35,6 +55,7 @@ else if(!cheeses.Any())
 @code{
     private IEnumerable<Cheese> cheeses;
     private string searchTerm = "";
+    private SortCriteria sortCriteria = SortCriteria.Name;
 
     private IEnumerable<Cheese> filteredCheeses;
     private IEnumerable<Cheese> FilteredCheeses
@@ -65,6 +86,32 @@ else if(!cheeses.Any())
                || cheese.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
                || cheese.Strength.Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
     }
+
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
+    }
+
+    private void Sort(SortCriteria criteria)
+    {
+        sortCriteria = criteria;
+        filteredCheeses = criteria switch
+        {
+            SortCriteria.Name => FilteredCheeses = filteredCheeses.OrderBy(c => c.Name),
+            SortCriteria.Price => FilteredCheeses = filteredCheeses.OrderBy(c => c.Price),
+            SortCriteria.Type => FilteredCheeses = filteredCheeses.OrderBy(c => c.Type),
+            SortCriteria.Strength => FilteredCheeses = filteredCheeses.OrderBy(c => c.Strength),
+            _ => filteredCheeses
+        };
+    }
+    private enum SortCriteria
+    {
+        Name,
+        Price,
+        Type,
+        Strength
+    }
+
 
 }
 
