@@ -6,6 +6,44 @@
 
 <h3>CartSummary</h3>
 
+<div>
+    <table class="table" style="background-color: white; vertical-align:middle;">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                @if (IsEditable)
+                {
+                    <th scope="col">Actions</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ShoppingCart.GetItems())
+            {
+                <tr>
+                    <td scope="col">@item.Cheese.Name</td>
+                    <td scope="col">@item.Cheese.Price.ToString("C")</td>
+                    <td scope="col">@(item.Quantity * 100)g</td>
+                    <td scope="col">@item.Total.ToString("C")</td>
+                    @if (IsEditable)
+                    {
+                        <td scope="col">
+                            <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">➕</button>
+                            <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">➖</button>
+                            <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">🗑</button>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
 @code {
     [Parameter]
     public bool IsEditable { get; set; } = false;
@@ -21,5 +59,18 @@
         await ProtectedSessionStorage.SetAsync("cart", ShoppingCart.GetItems());
     }
 
+    private void RemoveItem(CartItem item)
+    {
+        ShoppingCart.RemoveItem(item.Cheese);
+    }
 
+    private void IncreaseQuantity(CartItem item)
+    {
+        ShoppingCart.AddItem(item.Cheese, 1);
+    }
+
+    private void DecreaseQuantity(CartItem item)
+    {
+        ShoppingCart.RemoveItem(item.Cheese, 1);
+    }
 }
