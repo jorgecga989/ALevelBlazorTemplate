@@ -66,5 +66,10 @@
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
             return item?.Quantity ?? 0;
         }
+        public void SetItems(IEnumerable<CartItem> items)
+        {
+            _items = items.ToList();
+            OnCartUpdated?.Invoke();
+        }
     }
 }

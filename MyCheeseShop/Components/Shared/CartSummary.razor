@@ -2,12 +2,10 @@
 @using MyCheeseShop.Model
 @inject NavigationManager NavigationManager
 @inject ShoppingCart ShoppingCart
-@inject ProtectedSessionStorage ProtectedSessionStorage
-
-<h3>CartSummary</h3>
+@inject ProtectedSessionStorage ProtectedSessionStore
 
 <div>
-    <table class="table" style="background-color: white; vertical-align:middle;">
+    <table class="table" style="background-color: yellow; vertical-align:middle;">
         <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -31,15 +29,26 @@
                     @if (IsEditable)
                     {
                         <td scope="col">
-                            <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">➕</button>
-                            <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">➖</button>
-                            <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">🗑</button>
+                            <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">+</button>
+                            <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">-</button>
+                            <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">X</button>
                         </td>
                     }
                 </tr>
             }
         </tbody>
     </table>
+</div>
+
+<div class="d-flex justify-content-between">
+    <div>
+        <button @onclick="GoToStore" class="btn btn-outline-primary">Back to cheeses</button>
+    </div>
+    <div>
+        <h4>
+            Total:@(ShoppingCart.Total().ToString("C"))
+        </h4>
+    </div>
 </div>
 
 
@@ -56,7 +65,7 @@
     private async Task CartUpdated()
     {
         StateHasChanged();
-        await ProtectedSessionStorage.SetAsync("cart", ShoppingCart.GetItems());
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
     private void RemoveItem(CartItem item)
@@ -72,5 +81,9 @@
     private void DecreaseQuantity(CartItem item)
     {
         ShoppingCart.RemoveItem(item.Cheese, 1);
+    }
+    private void GoToStore()
+    {
+        NavigationManager.NavigateTo("/");
     }
 }
