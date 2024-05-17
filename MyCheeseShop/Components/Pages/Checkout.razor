@@ -23,6 +23,12 @@
     <div class="card-body bg-light">
         <h4 class="card-title">Order Summary</h4>
         <CartSummary />
+        <p></p>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button @onclick="GoToCart" class="btn btn-outline-warning">Back To Shopping Cart</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -30,7 +36,6 @@
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator />
     <div class="table ">
-
         <div class="card h-100">
             <div class="card-body bg-light">
                 <h4 class="card-title">Payment</h4>
@@ -69,8 +74,22 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div>
+            <button type="submit" class="btn btn-outline-success">
+                @if(isPaying)
+                {
+                    <span class="spinner-border spiner-border-sm" aria-hidden="true"></span>
+                    //display a loading icon when paying
+                }
+                else
+                {
+                    <span>✔</span>
+                }
+                Pay now
+            </button>
 
+        </div>
+    </div>
 </EditForm>
 
 
@@ -118,6 +137,10 @@
     private string GetFormattedAddress(User user)
     {
         return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.PostCode}";
+    }
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
     }
 
     private sealed class PaymentDetails

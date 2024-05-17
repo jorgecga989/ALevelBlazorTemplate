@@ -1,0 +1,25 @@
+﻿@page "/thank-you"
+@using Microsoft.AspNetCore.Authorization
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<div class="card">
+    <div class=" row justify-content-center">
+        <div class="col-auto">
+            <table class="table table-responsive">
+                <h1 style="text-align:center">Thank you</h1>
+                <h3 style="text-align: center">For shopping with us</h3>
+                <img src="https://t4.ftcdn.net/jpg/01/15/20/75/360_F_115207580_US2etunH78I7iMYHOoNVvxQTCIdoPdRj.jpg" class="img-fluid" alt="Loading"/>
+            </table>
+        </div>
+    </div>
+    <button @onclick="Home" class="btn btn-outline-warning">Back To Cheese</button>
+</div>
+
+@code {
+    private void Home()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}
