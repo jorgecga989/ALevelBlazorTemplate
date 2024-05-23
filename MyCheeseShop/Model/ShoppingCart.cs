@@ -77,5 +77,7 @@
             _items.Clear();
             OnCartUpdated?.Invoke();
         }
+         
+
     }
 }
