@@ -1,0 +1,12 @@
+﻿@page "/all-orders"
+@using Microsoft.AspNetCore.Authorization
+@using MyCheeseShop.Context
+@using System.Data
+@attribute [Authorize(Roles = "Admin")]
+@inject OrderProvider OrderProviderd 
+
+<h3>AllOrders</h3>
+
+@code {
+
+}
